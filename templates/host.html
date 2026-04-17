@@ -14,18 +14,32 @@
     <h1 class="logo">Pingo</h1>
     <p class="subtitle">Host Console</p>
 
-    <div class="game-code-display">
-      <small>Game Code</small>
-      <span id="game-code-value">------</span>
-      <button id="regen-code-btn" class="btn-regen" title="Generate new code">↺ new code</button>
-    </div>
+    <div class="join-panel">
 
-    <div class="player-count-badge">
-      <span id="player-count">0</span>
-      <small>Players Joined</small>
-    </div>
+      <!-- LEFT: QR + URL -->
+      <div class="join-qr-col">
+        <p class="join-label">Scan to Join</p>
+        <div id="qr-canvas" class="qr-canvas"></div>
+        <p class="join-url-line"><span id="player-url" class="join-url-text"></span></p>
+        <p class="join-short-line">also at <strong>tinyurl.com/228donzr</strong></p>
+      </div>
 
-    <p class="hint">Player URL &rarr; <strong id="player-url"></strong></p>
+      <div class="join-divider"></div>
+
+      <!-- RIGHT: PIN + player count -->
+      <div class="join-pin-col">
+        <p class="join-label">Game PIN</p>
+        <div class="pin-display">
+          <span id="game-code-value">------</span>
+          <button id="regen-code-btn" class="btn-regen" title="Generate new code">↺ new code</button>
+        </div>
+        <div class="player-count-badge">
+          <span id="player-count">0</span>
+          <small>Players Joined</small>
+        </div>
+      </div>
+
+    </div>
 
     <button id="start-btn" class="btn btn-green" disabled>
       Start Game
@@ -129,6 +143,7 @@
   </div>
 
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="/static/js/host.js"></script>
 </body>
 </html>

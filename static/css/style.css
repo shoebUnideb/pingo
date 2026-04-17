@@ -81,6 +81,91 @@ body {
 .print-only { display: none; }
 
 /* ── Lobby ────────────────────────────────────────────────────────────────── */
+.join-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: #111;
+  border: 1px solid #2e2e2e;
+  border-top: 3px solid #f0ede6;
+  border-radius: 4px;
+  padding: 32px 40px;
+  margin: 0 auto 24px;
+  max-width: 680px;
+  width: 100%;
+}
+
+.join-qr-col, .join-pin-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.join-label {
+  font-size: 0.72rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.qr-canvas {
+  background: #fff;
+  padding: 8px;
+  border-radius: 2px;
+  line-height: 0;
+}
+.qr-canvas img, .qr-canvas canvas { display: block; }
+
+.join-url-line {
+  margin: 0;
+  text-align: center;
+}
+.join-url-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #666;
+  word-break: break-all;
+}
+
+.join-short-line {
+  font-size: 0.78rem;
+  color: #555;
+  margin: 0;
+  text-align: center;
+}
+.join-short-line strong {
+  color: #aaa;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.join-divider {
+  width: 1px;
+  height: 260px;
+  background: #2e2e2e;
+  margin: 0 40px;
+  flex-shrink: 0;
+}
+
+.pin-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pin-display span {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #f0ede6;
+  letter-spacing: 12px;
+  line-height: 1.1;
+  font-family: 'Courier New', monospace;
+}
+
 .game-code-display {
   display: inline-flex;
   flex-direction: column;

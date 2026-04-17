@@ -64,8 +64,17 @@ summaryIdentityToggle.addEventListener('click', () => {
   }
 });
 
-// Show player URL
-playerUrlEl.textContent = window.location.origin + '/player';
+// Show player URL + generate QR
+const playerUrl = window.location.origin + '/player';
+playerUrlEl.textContent = playerUrl;
+new QRCode(document.getElementById('qr-canvas'), {
+  text: playerUrl,
+  width: 280,
+  height: 280,
+  colorDark: '#000000',
+  colorLight: '#ffffff',
+  correctLevel: QRCode.CorrectLevel.H,
+});
 
 // ── Socket events ─────────────────────────────────────────────────────────────
 socket.emit('join_as_host');
