@@ -225,16 +225,31 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  background: #0f1e40;
+  border: 1px solid #1a3a6a;
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.join-form .input-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  align-self: flex-start;
+  margin-bottom: -6px;
 }
 
 .name-input {
   width: 100%;
   max-width: 340px;
   padding: 14px 20px;
-  border-radius: 50px;
-  border: 2px solid #0f3460;
-  background: #0f3460;
+  border-radius: 12px;
+  border: 2px solid #1a3a6a;
+  background: #060d1f;
   color: #fff;
   font-size: 1.05rem;
   text-align: center;
@@ -242,7 +257,7 @@ body {
   transition: border-color 0.2s;
 }
 .name-input:focus { border-color: #e91e8c; }
-.name-input::placeholder { color: #666; }
+.name-input::placeholder { color: #444; }
 
 .error-msg { color: #e74c3c; font-size: 0.9rem; margin-top: 8px; }
 

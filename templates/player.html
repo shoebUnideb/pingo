@@ -13,25 +13,27 @@
     <h1 class="logo">Pingo</h1>
     <p class="subtitle">Enter the game code to join</p>
     <form id="join-form" class="join-form" autocomplete="off">
+      <span class="input-label">Game Code</span>
       <input
         id="code-input"
         type="text"
         class="name-input"
-        placeholder="Game code (6 digits)..."
+        placeholder="6-digit code"
         maxlength="6"
         inputmode="numeric"
         pattern="[0-9]{6}"
         required
       />
+      <span class="input-label">Your Name</span>
       <input
         id="name-input"
         type="text"
         class="name-input"
-        placeholder="Your name..."
+        placeholder="e.g. Alex"
         maxlength="30"
         required
       />
-      <button type="submit" class="btn btn-green">Join!</button>
+      <button type="submit" class="btn btn-green" style="width:100%;margin-top:8px;font-size:1.1rem;">Join Game →</button>
     </form>
     <p id="join-error" class="error-msg hidden"></p>
   </div>
