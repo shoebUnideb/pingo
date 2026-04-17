@@ -1,0 +1,75 @@
+/* ── Applied only when printing / saving as PDF ─────────────────────────── */
+
+/* Hide everything except the game-over summary */
+body * { visibility: hidden; }
+
+#gameover-screen,
+#gameover-screen * { visibility: visible; }
+
+#gameover-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 28px;
+  background: #fff !important;
+  color: #111 !important;
+}
+
+/* Print-only header */
+.print-only { display: block !important; }
+.print-header h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #111 !important;
+  margin-bottom: 4px;
+}
+.print-header p { font-size: 0.85rem; color: #555 !important; margin-bottom: 20px; }
+
+/* Hide screen-only elements */
+.no-print,
+.logo,
+.subtitle { display: none !important; }
+
+/* Override dark backgrounds to white/light for readability */
+.summary-card,
+.feedback-summary-wrap,
+.fb-entry,
+.sum-bar-track,
+.sum-opt-letter,
+.sum-q-num,
+.fb-avg-row {
+  background: #f4f4f4 !important;
+  color: #111 !important;
+}
+
+.sum-q-text,
+.sum-opt-text,
+.bar-option-text,
+.fb-entry-name,
+.fb-entry-comment,
+.fb-entry-contact,
+.fb-avg-label,
+.sum-attempted,
+.col-title,
+.sum-opt-count { color: #111 !important; }
+
+.summary-table-wrap {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.feedback-summary-wrap { display: block !important; }
+
+.sum-bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.sum-opt-letter { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+/* Page settings */
+@page {
+  size: A4;
+  margin: 18mm 15mm;
+}
+
+/* Avoid breaking cards across pages */
+.summary-card,
+.fb-entry { page-break-inside: avoid; break-inside: avoid; }

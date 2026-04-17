@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pingo – Player</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="player-body">
+
+  <!-- JOIN SCREEN -->
+  <div id="join-screen" class="screen">
+    <h1 class="logo">Pingo</h1>
+    <p class="subtitle">Enter your name to join</p>
+    <form id="join-form" class="join-form" autocomplete="off">
+      <input
+        id="name-input"
+        type="text"
+        class="name-input"
+        placeholder="Your name..."
+        maxlength="30"
+        required
+      />
+      <button type="submit" class="btn btn-green">Join!</button>
+    </form>
+    <p id="join-error" class="error-msg hidden"></p>
+  </div>
+
+  <!-- WAITING SCREEN -->
+  <div id="waiting-screen" class="screen hidden">
+    <div class="waiting-anim">⏳</div>
+    <h2 id="waiting-name" class="waiting-name"></h2>
+    <p class="subtitle">Waiting for host to start the game…</p>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div id="question-screen" class="screen hidden">
+    <div class="player-header">
+      <span id="pq-counter" class="q-counter">Q 1 / 7</span>
+      <span id="player-name-badge" class="player-name-badge"></span>
+    </div>
+    <div class="question-box">
+      <p id="pquestion-text" class="question-text"></p>
+    </div>
+    <div class="options-grid" id="options-grid">
+      <!-- 4 option buttons injected by JS -->
+    </div>
+    <div id="submitted-msg" class="submitted-msg hidden">
+      ✅ Answer submitted! Waiting for next question…
+    </div>
+  </div>
+
+  <!-- FEEDBACK SCREEN -->
+  <div id="feedback-screen" class="screen hidden">
+    <h2 class="logo">One last thing! 🙏</h2>
+    <p class="subtitle">How was the quiz? Takes 30 seconds.</p>
+
+    <form id="feedback-form" class="feedback-form" autocomplete="off">
+
+      <!-- Star rating -->
+      <div class="star-group">
+        <p class="fb-label">Rate your experience</p>
+        <div class="stars" id="star-container">
+          <span class="star" data-val="1">★</span>
+          <span class="star" data-val="2">★</span>
+          <span class="star" data-val="3">★</span>
+          <span class="star" data-val="4">★</span>
+          <span class="star" data-val="5">★</span>
+        </div>
+        <input type="hidden" id="rating-val" value="0" />
+      </div>
+
+      <!-- Comment -->
+      <div class="fb-field">
+        <label class="fb-label" for="fb-comment">Any comments? <span class="optional">(optional)</span></label>
+        <textarea id="fb-comment" class="fb-textarea" placeholder="What did you think…" maxlength="500" rows="3"></textarea>
+      </div>
+
+      <!-- Contact -->
+      <div class="fb-field">
+        <label class="fb-label" for="fb-contact">Email or phone <span class="optional">(optional)</span></label>
+        <input id="fb-contact" type="text" class="name-input" placeholder="so we can follow up…" maxlength="100" />
+      </div>
+
+      <button type="submit" class="btn btn-green">Submit Feedback</button>
+      <button type="button" id="skip-feedback-btn" class="btn-skip">Skip</button>
+    </form>
+
+    <div id="feedback-thanks" class="feedback-thanks hidden">
+      <div class="waiting-anim">🎉</div>
+      <p class="waiting-name">Thanks, <span id="fb-name"></span>!</p>
+      <p class="subtitle">Waiting for host to end the quiz…</p>
+    </div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="pgameover-screen" class="screen hidden">
+    <h2 class="logo">Pingo – Quiz Finished! 🎉</h2>
+    <p class="subtitle">Thanks for playing, <span id="go-name"></span>!</p>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/static/js/player.js"></script>
+</body>
+</html>

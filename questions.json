@@ -1,0 +1,37 @@
+[
+  {
+    "question": "What is the capital of France?",
+    "options": ["London", "Berlin", "Paris", "Madrid"],
+    "correct": 2
+  },
+  {
+    "question": "Which planet is closest to the Sun?",
+    "options": ["Venus", "Mercury", "Earth", "Mars"],
+    "correct": 1
+  },
+  {
+    "question": "What is 12 × 8?",
+    "options": ["86", "96", "104", "88"],
+    "correct": 1
+  },
+  {
+    "question": "Who invented the telephone?",
+    "options": ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Albert Einstein"],
+    "correct": 2
+  },
+  {
+    "question": "What is the largest ocean on Earth?",
+    "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    "correct": 3
+  },
+  {
+    "question": "How many sides does a hexagon have?",
+    "options": ["5", "6", "7", "8"],
+    "correct": 1
+  },
+  {
+    "question": "What is the chemical symbol for water?",
+    "options": ["WO", "HO2", "H2O", "OW"],
+    "correct": 2
+  }
+]

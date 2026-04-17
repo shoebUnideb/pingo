@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pingo – Host</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/print.css" media="print" />
+</head>
+<body class="host-body">
+
+  <!-- LOBBY SCREEN -->
+  <div id="lobby-screen" class="screen">
+    <h1 class="logo">Pingo</h1>
+    <p class="subtitle">Host Dashboard</p>
+
+    <div class="player-count-badge">
+      <span id="player-count">0</span>
+      <small>players joined</small>
+    </div>
+
+    <p class="hint">Share this URL with players:<br>
+      <strong id="player-url"></strong>
+    </p>
+
+    <button id="start-btn" class="btn btn-green" disabled>
+      Start Game
+    </button>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div id="question-screen" class="screen dashboard-screen hidden">
+
+    <!-- Top bar -->
+    <div class="host-header">
+      <span id="q-counter" class="q-counter">Q 1 / 7</span>
+      <div class="header-stats">
+        <span id="answered-badge" class="answered-badge">0 answered</span>
+        <span id="pending-badge" class="pending-badge">0 pending</span>
+      </div>
+    </div>
+
+    <!-- Question -->
+    <div class="question-box">
+      <p id="question-text" class="question-text"></p>
+    </div>
+
+    <!-- Two-column dashboard -->
+    <div class="dashboard-columns">
+
+      <!-- LEFT: Live bar chart -->
+      <div class="dashboard-col col-chart">
+        <h3 class="col-title">Live Results</h3>
+        <div class="chart-grid" id="chart-grid"></div>
+      </div>
+
+      <!-- RIGHT: Player response feed -->
+      <div class="dashboard-col col-feed">
+        <div class="feed-col-header">
+          <h3 class="col-title">Responses <span id="feed-count" class="feed-count">0</span></h3>
+          <button id="identity-toggle" class="identity-toggle off" title="Show/hide player names">
+            <span class="toggle-icon">👤</span>
+            <span class="toggle-label">Names hidden</span>
+          </button>
+        </div>
+        <div class="response-feed names-hidden" id="response-feed">
+          <p class="feed-empty" id="feed-empty">Waiting for answers…</p>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="next-btn" class="btn btn-blue">Next Question →</button>
+  </div>
+
+  <!-- FEEDBACK PHASE SCREEN (host waits while players give feedback) -->
+  <div id="feedback-phase-screen" class="screen hidden">
+    <h2 class="logo">Collecting Feedback</h2>
+    <p class="subtitle">Players are filling in their feedback now</p>
+
+    <div class="player-count-badge">
+      <span id="fb-submitted-count">0</span>
+      <small>submitted so far</small>
+    </div>
+    <p id="fb-of-total" class="hint" style="margin-bottom:28px">out of <strong id="fb-total-players">0</strong> players</p>
+
+    <button id="end-game-btn" class="btn btn-green">End &amp; See Results</button>
+    <p class="hint" style="margin-top:12px">You can end anytime — unsubmitted feedback won't be counted.</p>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="gameover-screen" class="screen summary-screen hidden">
+
+    <div class="summary-top-bar no-print">
+      <div>
+        <h2 class="logo" style="display:inline">Pingo – Quiz Finished! 🎉</h2>
+        <p class="subtitle" style="margin-top:4px">Here's how everyone did</p>
+      </div>
+      <button id="summary-identity-toggle" class="identity-toggle off" title="Show/hide who answered what">
+        <span class="toggle-icon">👤</span>
+        <span class="toggle-label">Names hidden</span>
+      </button>
+    </div>
+
+    <!-- Print-only header (hidden on screen) -->
+    <div class="print-only print-header">
+      <h1>Pingo – Quiz Report</h1>
+      <p id="print-date"></p>
+    </div>
+
+    <div id="summary-table-wrap" class="summary-table-wrap">
+      <!-- quiz stat rows injected by host.js -->
+    </div>
+
+    <!-- Feedback summary -->
+    <div id="feedback-summary-wrap" class="feedback-summary-wrap hidden">
+      <h3 class="col-title" style="margin-bottom:14px;">Feedback Received</h3>
+      <div id="feedback-list"></div>
+    </div>
+
+    <div class="gameover-actions no-print">
+      <button id="save-pdf-btn" class="btn btn-pdf">⬇ Save as PDF</button>
+      <button id="reset-btn" class="btn btn-green">Start New Game</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/static/js/host.js"></script>
+</body>
+</html>
