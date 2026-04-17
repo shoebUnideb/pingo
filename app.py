@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit, join_room
@@ -13,10 +14,14 @@ with open('questions.json') as f:
     QUESTIONS = json.load(f)
 
 # ── Game state (in-memory, resets on server restart) ─────────────────────────
+def generate_code():
+    return str(random.randint(100000, 999999))
+
 state = {
     'started': False,
     'current_index': -1,      # -1 = lobby / not started
     'host_sid': None,
+    'game_code': generate_code(),  # 6-digit join code
     'players': {},             # sid → name
     'answers': {},             # sid → option index (for current question)
     'answer_counts': [0, 0, 0, 0],
@@ -95,6 +100,7 @@ def on_join_as_host():
         'player_count': len(state['players']),
         'started': state['started'],
         'question_count': len(QUESTIONS),
+        'game_code': state['game_code'],
     })
 
 
@@ -151,6 +157,7 @@ def on_reset_game():
     state['question_stats'] = []
     state['feedback_data'] = []
     state['feedback_phase'] = False
+    state['game_code'] = generate_code()   # new code each reset
     reset_answers()
     # Keep players connected, just go back to lobby
     socketio.emit('game_reset')
@@ -158,12 +165,17 @@ def on_reset_game():
         'player_count': len(state['players']),
         'started': False,
         'question_count': len(QUESTIONS),
+        'game_code': state['game_code'],
     }, room='host_room')
 
 
 # ── Socket events: PLAYER ─────────────────────────────────────────────────────
 @socketio.on('join_as_player')
 def on_join_as_player(data):
+    code = str(data.get('code', '')).strip()
+    if code != state['game_code']:
+        emit('join_error', {'message': 'Wrong game code. Try again.'})
+        return
     name = str(data.get('name', 'Anonymous')).strip()[:30]
     if not name:
         name = 'Anonymous'

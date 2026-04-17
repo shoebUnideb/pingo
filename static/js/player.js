@@ -14,6 +14,7 @@ const questionScreen  = document.getElementById('question-screen');
 const feedbackScreen  = document.getElementById('feedback-screen');
 const gameoverScreen  = document.getElementById('pgameover-screen');
 const joinForm        = document.getElementById('join-form');
+const codeInput       = document.getElementById('code-input');
 const nameInput       = document.getElementById('name-input');
 const joinError       = document.getElementById('join-error');
 const waitingName     = document.getElementById('waiting-name');
@@ -33,10 +34,18 @@ const starContainer   = document.getElementById('star-container');
 // ── Join form ─────────────────────────────────────────────────────────────────
 joinForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  const code = codeInput.value.trim();
   const name = nameInput.value.trim();
-  if (!name) return;
+  if (!code || !name) return;
   playerName = name;
-  socket.emit('join_as_player', { name });
+  joinError.classList.add('hidden');
+  socket.emit('join_as_player', { code, name });
+});
+
+socket.on('join_error', (data) => {
+  joinError.textContent = data.message;
+  joinError.classList.remove('hidden');
+  playerName = '';
 });
 
 // ── Star rating ───────────────────────────────────────────────────────────────

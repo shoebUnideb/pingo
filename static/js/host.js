@@ -74,6 +74,9 @@ socket.on('host_ack', (data) => {
   playerCount = data.player_count;
   playerCountEl.textContent = playerCount;
   startBtn.disabled = playerCount === 0;
+  if (data.game_code) {
+    document.getElementById('game-code-value').textContent = data.game_code;
+  }
 });
 
 socket.on('player_joined', (data) => {

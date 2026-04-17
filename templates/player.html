@@ -11,8 +11,18 @@
   <!-- JOIN SCREEN -->
   <div id="join-screen" class="screen">
     <h1 class="logo">Pingo</h1>
-    <p class="subtitle">Enter your name to join</p>
+    <p class="subtitle">Enter the game code to join</p>
     <form id="join-form" class="join-form" autocomplete="off">
+      <input
+        id="code-input"
+        type="text"
+        class="name-input"
+        placeholder="Game code (6 digits)..."
+        maxlength="6"
+        inputmode="numeric"
+        pattern="[0-9]{6}"
+        required
+      />
       <input
         id="name-input"
         type="text"

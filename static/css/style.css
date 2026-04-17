@@ -77,6 +77,19 @@ body {
 .print-only { display: none; }
 
 /* ── Lobby ────────────────────────────────────────────────────────────────── */
+.game-code-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #0f3460;
+  border: 2px solid #f5a623;
+  border-radius: 16px;
+  padding: 14px 48px;
+  margin: 0 auto 16px;
+}
+.game-code-display small { font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; }
+.game-code-display span  { font-size: 3rem; font-weight: 900; color: #f5a623; letter-spacing: 8px; line-height: 1.2; }
+
 .player-count-badge {
   display: inline-flex;
   flex-direction: column;
