@@ -279,4 +279,4 @@ if __name__ == '__main__':
     print("Starting Pingo server...")
     print(f"Host view : http://127.0.0.1:{port}/host")
     print(f"Player view: http://127.0.0.1:{port}/player")
-    socketio.run(app, host='0.0.0.0', port=port, debug=False)
+    socketio.run(app, host='0.0.0.0', port=port, debug=False, allow_unsafe_werkzeug=True)
