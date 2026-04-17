@@ -1,4 +1,4 @@
-const OPTION_COLORS = ['#e74c3c', '#3498db', '#f1c40f', '#2ecc71'];
+const OPTION_COLORS = ['#888888', '#505050', '#707070', '#383838'];
 const OPTION_LABELS = ['A', 'B', 'C', 'D'];
 
 const socket = io();
