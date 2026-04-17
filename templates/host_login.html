@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pingo – Host Login</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <style>
+    .login-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #111;
+      border: 1px solid #2e2e2e;
+      border-top: 3px solid #f0ede6;
+      border-radius: 4px;
+      padding: 40px 52px;
+      margin: 80px auto 0;
+      max-width: 360px;
+      width: 90%;
+      gap: 14px;
+    }
+    .login-card h2 { margin: 0 0 8px; font-size: 1.5rem; color: #f0ede6; }
+    .login-card label {
+      width: 100%;
+      font-size: 0.72rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .login-card input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0a0a0a;
+      border: 1px solid #2e2e2e;
+      border-radius: 4px;
+      color: #f0ede6;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      padding: 10px 14px;
+      margin-top: 4px;
+      outline: none;
+    }
+    .login-card input:focus { border-color: #f0ede6; }
+    .login-error {
+      color: #c0392b;
+      font-size: 0.82rem;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+    .login-card .btn { margin-top: 6px; width: 100%; }
+  </style>
+</head>
+<body class="host-body">
+  <div class="login-card">
+    <h2 class="logo">Pingo</h2>
+    <p class="subtitle" style="margin:0 0 12px">Host Access</p>
+
+    {% if error %}
+      <p class="login-error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="/host-login" style="width:100%;display:flex;flex-direction:column;gap:14px">
+      <div>
+        <label>Username</label>
+        <input type="text" name="username" autocomplete="username" required />
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn btn-green">Enter Host Console →</button>
+    </form>
+  </div>
+</body>
+</html>

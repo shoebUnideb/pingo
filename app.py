@@ -2,11 +2,14 @@ import json
 import os
 import random
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO, emit, join_room
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(24)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'pingo-default-secret-key-change-me')
+
+HOST_USERNAME = 'host_BETKKx'
+HOST_PASSWORD = 'XF6t5uld3Ec6PR'
 socketio = SocketIO(app, async_mode='gevent', cors_allowed_origins='*')
 
 # ── Load questions ───────────────────────────────────────────────────────────
@@ -72,8 +75,28 @@ def current_question_payload():
 
 
 # ── HTTP routes ───────────────────────────────────────────────────────────────
+@app.route('/host-login', methods=['GET', 'POST'])
+def host_login():
+    error = None
+    if request.method == 'POST':
+        if (request.form.get('username') == HOST_USERNAME and
+                request.form.get('password') == HOST_PASSWORD):
+            session['host_auth'] = True
+            return redirect(url_for('host_page'))
+        error = 'Invalid credentials.'
+    return render_template('host_login.html', error=error)
+
+
+@app.route('/host-logout')
+def host_logout():
+    session.pop('host_auth', None)
+    return redirect(url_for('host_login'))
+
+
 @app.route('/host')
 def host_page():
+    if not session.get('host_auth'):
+        return redirect(url_for('host_login'))
     return render_template('host.html')
 
 
