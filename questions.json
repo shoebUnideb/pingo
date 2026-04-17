@@ -1,37 +1,42 @@
 [
   {
-    "question": "What is the capital of France?",
-    "options": ["London", "Berlin", "Paris", "Madrid"],
-    "correct": 2
+    "question": "Which area consumes most of your time?",
+    "options": ["Product / engineering", "Data handling / processing", "Operations / coordination", "Customer / external communication"],
+    "correct": -1
   },
   {
-    "question": "Which planet is closest to the Sun?",
-    "options": ["Venus", "Mercury", "Earth", "Mars"],
-    "correct": 1
+    "question": "What do you repeat most frequently (daily/weekly)?",
+    "options": ["Moving data between systems", "Checking or cleaning data", "Sending updates / reports", "Monitoring systems manually"],
+    "correct": -1
   },
   {
-    "question": "What is 12 × 8?",
-    "options": ["86", "96", "104", "88"],
-    "correct": 1
+    "question": "What feels more manual than it should be?",
+    "options": ["Data entry / syncing", "Internal communication", "Reporting", "Handling errors / edge cases"],
+    "correct": -1
   },
   {
-    "question": "Who invented the telephone?",
-    "options": ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Albert Einstein"],
-    "correct": 2
+    "question": "Where do things break most often?",
+    "options": ["Data inconsistencies", "Integration between tools", "Human errors", "System reliability"],
+    "correct": -1
   },
   {
-    "question": "What is the largest ocean on Earth?",
-    "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-    "correct": 3
+    "question": "When something breaks, what do you usually do?",
+    "options": ["Fix manually", "Use internal scripts/tools", "Use external tools", "Temporary workaround"],
+    "correct": -1
   },
   {
-    "question": "How many sides does a hexagon have?",
-    "options": ["5", "6", "7", "8"],
-    "correct": 1
+    "question": "How much time do these issues take weekly?",
+    "options": ["Less than 1 hour", "1–3 hours", "3–10 hours", "More than 10 hours"],
+    "correct": -1
   },
   {
-    "question": "What is the chemical symbol for water?",
-    "options": ["WO", "HO2", "H2O", "OW"],
-    "correct": 2
+    "question": "If these processes required zero manual effort, what would be the impact?",
+    "options": ["High impact", "Moderate impact", "Low impact", "No real impact"],
+    "correct": -1
+  },
+  {
+    "question": "Are you aware of tools like Zapier or n8n?",
+    "options": ["Yes, and I actively use them", "Yes, but I don't use them", "Heard of them, not familiar", "Not aware"],
+    "correct": -1
   }
 ]
