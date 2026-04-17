@@ -169,7 +169,15 @@ def on_reset_game():
     }, room='host_room')
 
 
-# ── Socket events: PLAYER ─────────────────────────────────────────────────────
+@socketio.on('regenerate_code')
+def on_regenerate_code():
+    if request.sid != state['host_sid']:
+        return
+    state['game_code'] = generate_code()
+    emit('code_updated', {'game_code': state['game_code']})
+
+
+# ── Socket events: PLAYER ──────────────────────────────────────────────────
 @socketio.on('join_as_player')
 def on_join_as_player(data):
     code = str(data.get('code', '')).strip()

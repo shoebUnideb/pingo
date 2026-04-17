@@ -90,6 +90,19 @@ body {
 .game-code-display small { font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; }
 .game-code-display span  { font-size: 3rem; font-weight: 900; color: #f5a623; letter-spacing: 8px; line-height: 1.2; }
 
+.btn-regen {
+  margin-top: 8px;
+  background: none;
+  border: 1px solid #f5a623;
+  color: #f5a623;
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-regen:hover { background: rgba(245,166,35,0.15); }
+
 .player-count-badge {
   display: inline-flex;
   flex-direction: column;

@@ -79,6 +79,14 @@ socket.on('host_ack', (data) => {
   }
 });
 
+document.getElementById('regen-code-btn').addEventListener('click', () => {
+  socket.emit('regenerate_code');
+});
+
+socket.on('code_updated', (data) => {
+  document.getElementById('game-code-value').textContent = data.game_code;
+});
+
 socket.on('player_joined', (data) => {
   playerCount = data.count;
   playerCountEl.textContent = playerCount;
