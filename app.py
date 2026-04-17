@@ -6,7 +6,7 @@ from flask_socketio import SocketIO, emit, join_room
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
-socketio = SocketIO(app, async_mode='threading', cors_allowed_origins='*')
+socketio = SocketIO(app, async_mode='gevent', cors_allowed_origins='*')
 
 # ── Load questions ───────────────────────────────────────────────────────────
 with open('questions.json') as f:
