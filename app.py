@@ -41,17 +41,17 @@ def snapshot_current_question():
     if idx < 0 or idx >= len(QUESTIONS):
         return
     q = QUESTIONS[idx]
-    # Build per-player response list
+    # Build per-player response list (exclude sentinel -1 entries)
     player_responses = [
         {'name': state['players'][sid], 'answer_index': ans_idx}
         for sid, ans_idx in state['answers'].items()
-        if sid in state['players']
+        if sid in state['players'] and ans_idx != -1
     ]
     state['question_stats'].append({
         'question': q['question'],
         'options': q['options'],
         'counts': list(state['answer_counts']),
-        'attempted': len(state['answers']),
+        'attempted': sum(1 for v in state['answers'].values() if v != -1),
         'total_players': len(state['players']),
         'player_responses': player_responses,
     })
@@ -65,6 +65,8 @@ def reset_answers():
 
 def current_question_payload():
     idx = state['current_index']
+    if idx < 0 or idx >= len(QUESTIONS):
+        return None
     q = QUESTIONS[idx]
     return {
         'question': q['question'],
@@ -140,6 +142,8 @@ def on_start_game():
     state['feedback_phase'] = False
     reset_answers()
     payload = current_question_payload()
+    if payload is None:
+        return
     socketio.emit('question_data', payload)  # broadcast to everyone
     emit('answer_update', {'counts': state['answer_counts'], 'total': 0}, room='host_room')
 
@@ -148,7 +152,10 @@ def on_start_game():
 def on_next_question():
     if request.sid != state['host_sid']:
         return
+    if not state['started']:
+        return
     snapshot_current_question()
+    reset_answers()  # close the window for late submissions immediately after snapshot
     next_idx = state['current_index'] + 1
     if next_idx >= len(QUESTIONS):
         # Enter feedback phase instead of ending immediately
@@ -165,8 +172,9 @@ def on_next_question():
         }, room='host_room')
         return
     state['current_index'] = next_idx
-    reset_answers()
     payload = current_question_payload()
+    if payload is None:
+        return
     socketio.emit('question_data', payload)
     emit('answer_update', {'counts': state['answer_counts'], 'total': 0}, room='host_room')
 
@@ -218,7 +226,9 @@ def on_join_as_player(data):
 
     # If game already in progress, send current question immediately
     if state['started'] and state['current_index'] >= 0:
-        emit('question_data', current_question_payload())
+        payload = current_question_payload()
+        if payload:
+            emit('question_data', payload)
     else:
         emit('waiting', {'message': 'Waiting for host to start the game...'})
 
@@ -233,17 +243,22 @@ def on_submit_answer(data):
     if sid in state['answers']:
         return  # already answered this question
 
+    state['answers'][sid] = -1  # claim slot before any yield point to block concurrent events
+
     try:
         idx = int(data.get('answer_index'))
     except (TypeError, ValueError):
+        del state['answers'][sid]
         return
 
     if idx not in (0, 1, 2, 3):
+        del state['answers'][sid]
         return
 
     state['answers'][sid] = idx
     state['answer_counts'][idx] += 1
     state['answer_details'].append({
+        'sid': sid,
         'name': state['players'][sid],
         'answer_index': idx,
     })
@@ -311,8 +326,10 @@ def on_disconnect():
         if sid in state['answers']:
             # Undo their answer from counts to keep data accurate
             idx = state['answers'][sid]
-            state['answer_counts'][idx] = max(0, state['answer_counts'][idx] - 1)
+            if idx != -1:  # -1 is the sentinel (slot claimed but answer not yet written)
+                state['answer_counts'][idx] = max(0, state['answer_counts'][idx] - 1)
             del state['answers'][sid]
+        state['answer_details'] = [d for d in state['answer_details'] if d.get('sid') != sid]
         socketio.emit('player_joined', {'count': len(state['players'])}, room='host_room')
 
 
